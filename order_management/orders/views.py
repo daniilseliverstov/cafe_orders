@@ -29,6 +29,7 @@ def add_order_view(request):
             order = form.save(commit=False)
             order.status = 'pending'
             order.save()
+            form.save_m2m()
             return redirect('orders:order_list')
     else:
         form = OrderForm()

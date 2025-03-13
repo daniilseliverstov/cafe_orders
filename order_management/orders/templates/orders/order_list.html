@@ -2,22 +2,19 @@
 
 {% block title %}Список заказов{% endblock %}
 
+{% load static %}
+
 {% block content %}
     <h1>Список заказов</h1>
-    <form method="get" action="{% url 'orders:search_order' %}">
-        <input type="text" name="query" placeholder="Поиск по номеру стола или блюду" value="{{ query }}">
-        <select name="status">
-            <option value="">Все статусы</option>
-            <option value="pending" {% if status == 'pending' %}selected{% endif %}>В ожидании</option>
-            <option value="in_progress" {% if status == 'in_progress' %}selected{% endif %}>В процессе</option>
-            <option value="completed" {% if status == 'completed' %}selected{% endif %}>Завершен</option>
-            <option value="paid" {% if status == 'paid' %}selected{% endif %}>Оплачен</option>
-        </select>
-        <button type="submit">Поиск</button>
-    </form>
     <ul>
         {% for order in orders %}
-            <li>Заказ {{ order.id }} - Стол {{ order.table_number }} - Статус: {{ order.status }}</li>
+            <li>Заказ {{ order.id }} - Стол {{ order.table_number }} - Статус: {{ order.status }} - Общая стоимость: {{ order.total_price }} руб.
+                <ul>
+                    {% for dish in order.items.all %}
+                        <li>{{ dish.name }} - {{ dish.price }} руб.</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
