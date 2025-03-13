@@ -1,0 +1,14 @@
+{% extends 'orders/base.html' %}
+
+{% block title %}Поиск заказа{% endblock %}
+
+{% block content %}
+    <h1>Результаты поиска</h1>
+    <ul>
+        {% for order in orders %}
+            <li>Заказ {{ order.id }} - Стол {{ order.table_number }} - Статус: {{ order.status }}</li>
+        {% empty %}
+            <li>Заказов не найдено.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
