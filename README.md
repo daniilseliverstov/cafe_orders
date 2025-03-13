@@ -100,20 +100,21 @@ Endpoints
 
     Получить список заказов:
 
-    bash
+```bash
 
 curl -X GET http://127.0.0.1:8000/api/orders/
+```
 
 Создать новый заказ:
 
-bash
+```bash
 
     curl -X POST http://127.0.0.1:8000/api/orders/ -H "Content-Type: application/json" -d '{
         "table_number": 5,
         "items": [{"name": "Pizza", "price": 10.99}, {"name": "Coke", "price": 2.99}],
         "status": "pending"
     }'
-
+```
 Развертывание
 Настройка Production
 
